@@ -27,5 +27,6 @@ class PageController extends Controller
 
     public function dashboard() {
         $user = Auth::user();
+
     }
 }
