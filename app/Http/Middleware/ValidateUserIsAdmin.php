@@ -21,6 +21,9 @@ class ValidateUserIsAdmin
         if ($user->is_admin) {
             return $next($request);
         }
-        return redirect()->back()->withErrors(['You lack the permissions to access that page.']);
+        if (Auth::check()) {
+            return redirect('/resume')->withErrors(['You lack the permissions to access that page.']);
+        }
+        return redirect('/')->withErrors(['You lack the permissions to access that page.']);
     }
 }

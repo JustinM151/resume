@@ -2,6 +2,7 @@
     <Head title="Resume" />
 
     <BreezeAuthenticatedLayout>
+        <Errors class="mb-4" />
         <div class="py-0 sm:py-12 ">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -130,6 +131,7 @@
 </template>
 
 <script>
+import Errors from '@/Components/ValidationErrors.vue'
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import ResumeSection from "@/Components/ResumeSection.vue";
 import { Head } from '@inertiajs/inertia-vue3';
@@ -140,6 +142,7 @@ export default {
         SkillsList,
         BreezeAuthenticatedLayout,
         ResumeSection,
+        Errors,
         Head,
     },
     props: {

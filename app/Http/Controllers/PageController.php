@@ -27,6 +27,14 @@ class PageController extends Controller
 
     public function dashboard() {
         $user = Auth::user();
-
+        $resumes = Resume::with('education')
+            ->with('experience')
+            ->with('projects')
+            ->with('skills')
+            ->with('awards')
+            ->where('active',true)
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
+        return Inertia::render('Dashboard')->with('resumes',$resumes);
     }
 }
