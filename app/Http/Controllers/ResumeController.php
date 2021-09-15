@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Resume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 class ResumeController extends Controller
 {
@@ -53,11 +56,18 @@ class ResumeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Resume  $resume
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function edit(Resume $resume)
+    public function edit($resume)
     {
-        //
+        $resume = Resume::with('education')
+            ->with('coverLetters')
+            ->with('experience')
+            ->with('projects')
+            ->with('skills')
+            ->with('awards')
+            ->findOrFail($resume);
+        return Inertia::render('EditResume')->with('resume',$resume);
     }
 
     /**
@@ -65,11 +75,19 @@ class ResumeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Resume  $resume
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function update(Request $request, Resume $resume)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $resume = Resume::findOrFail($id);
+            $resume->fill($request->input());
+            $resume->save();
+            return Inertia::render('EditResume')->with('resume',$resume)->with('notifications',['Successfully updated Resume']);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('errors', ['An unhandled exception occured while updating your resume.']);
+        }
     }
 
     /**

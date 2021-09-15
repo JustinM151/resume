@@ -9,6 +9,12 @@ class Resume extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'email', 'phone', 'location', 'objective'];
+
+    public function coverLetters() {
+        return $this->hasMany(CoverLetter::class);
+    }
+
     public function education() {
         return $this->hasMany(Education::class);
     }
