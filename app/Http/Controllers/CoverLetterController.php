@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CoverLetter;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CoverLetterController extends Controller
 {
@@ -31,11 +32,18 @@ class CoverLetterController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+
      */
     public function store(Request $request)
     {
-        //
+        $letter = new CoverLetter($request->input());
+        $letter->save();
+        if ($request->get('default')) {
+            CoverLetter::where('default',true)->where('id','<>', $letter->id)->update(['default'=>false]);
+        }
+        return Inertia::render('EditResume', [
+            'letter' => $letter
+        ]);
     }
 
     /**

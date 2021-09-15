@@ -31,6 +31,10 @@ Route::get('/resume', [\App\Http\Controllers\PageController::class, 'resume'])->
 Route::get('/resume/{id}', [\App\Http\Controllers\ResumeController::class, 'edit'])->middleware(['auth', 'admin'])->name('edit.resume');
 Route::patch('/resume/{id}', [\App\Http\Controllers\ResumeController::class, 'update'])->middleware(['auth', 'admin'])->name('update.resume');
 
+Route::get('/coverletter/{id}', [\App\Http\Controllers\CoverLetterController::class, 'edit'])->middleware(['auth', 'admin'])->name('edit.coverletter');
+Route::post('/coverletter', [\App\Http\Controllers\CoverLetterController::class, 'store'])->middleware(['auth', 'admin'])->name('store.coverletter');
+Route::patch('/coverletter/{id}', [\App\Http\Controllers\CoverLetterController::class, 'update'])->middleware(['auth', 'admin'])->name('update.coverletter');
+
 Route::get('/dashboard', [\App\Http\Controllers\PageController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('dashboard');
 
 require __DIR__.'/auth.php';

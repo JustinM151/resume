@@ -20344,6 +20344,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Input */ "./resources/js/Components/Input.vue");
 /* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Components_Checkbox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Checkbox */ "./resources/js/Components/Checkbox.vue");
+
 
 
 
@@ -20355,6 +20357,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EditResume",
   components: {
+    Checkbox: _Components_Checkbox__WEBPACK_IMPORTED_MODULE_8__["default"],
     Button: _Components_Button__WEBPACK_IMPORTED_MODULE_6__["default"],
     Input: _Components_Input__WEBPACK_IMPORTED_MODULE_5__["default"],
     Label: _Components_Label__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -20375,13 +20378,42 @@ __webpack_require__.r(__webpack_exports__);
         phone: this.resume.phone,
         location: this.resume.location,
         objective: this.resume.objective
-      })
+      }),
+      coverLetterForm: this.$inertia.form({
+        title: '',
+        body: '',
+        "default": true,
+        resume_id: this.resume.id
+      }),
+      coverLetterFormVisible: false
     };
   },
   methods: {
     updateResume: function updateResume() {
       this.contactForm.patch(this.route('update.resume', this.resume.id), {//onFinish: () => this.form.reset('password'),
       });
+    },
+    createCoverLetter: function createCoverLetter() {
+      this.coverLetterForm.post(this.route('store.coverletter'), {
+        onFinish: function onFinish() {// Let the user know its done...
+        }
+      });
+    },
+    toggleNewCoverLetterForm: function toggleNewCoverLetterForm() {
+      var btn = document.getElementById('coverLetterToggleBtn');
+      var frmDiv = document.getElementById('newCoverLetter');
+      console.log('We here!' + this.coverLetterFormVisible);
+      console.log(btn);
+
+      if (this.coverLetterFormVisible) {
+        frmDiv.classList.add("hidden");
+        btn.innerText = "New Cover Letter";
+      } else {
+        frmDiv.classList.remove("hidden");
+        btn.innerText = "Hide Form";
+      }
+
+      this.coverLetterFormVisible = !this.coverLetterFormVisible;
     }
   }
 });
@@ -22301,10 +22333,13 @@ var _hoisted_17 = {
   "class": "w-3/4"
 };
 var _hoisted_18 = {
+  "class": "mb-4"
+};
+var _hoisted_19 = {
   "class": "table-auto w-full"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "text-left font-extrabold bg-gray-300 p-2 w-2/3"
 }, "Title"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "text-left font-extrabold bg-gray-300 p-2"
@@ -22314,21 +22349,55 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_20 = {
-  "class": "odd:bg-gray-200"
-};
 var _hoisted_21 = {
-  "class": "p-2"
+  "class": "odd:bg-gray-200"
 };
 var _hoisted_22 = {
   "class": "p-2"
 };
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("D");
-
-var _hoisted_24 = {
+var _hoisted_23 = {
   "class": "p-2"
 };
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("D");
+
+var _hoisted_25 = {
+  "class": "p-2"
+};
+var _hoisted_26 = {
+  "class": "text-right"
+};
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("New Cover Letter");
+
+var _hoisted_28 = {
+  id: "newCoverLetter",
+  "class": "hidden"
+};
+var _hoisted_29 = {
+  "class": "my-4"
+};
+
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Cover Letter Title:");
+
+var _hoisted_31 = {
+  "class": "my-4"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Cover Letter:");
+
+var _hoisted_33 = {
+  "class": "my-4"
+};
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Make Default ");
+
+var _hoisted_35 = {
+  "class": "my-4 text-center"
+};
+
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("CREATE");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -22341,6 +22410,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_widget_box = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("widget-box");
 
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
+
+  var _component_Checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Checkbox");
 
   var _component_main_content_box = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("main-content-box");
 
@@ -22502,8 +22573,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-4"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.resume.cover_letters, function (letter) {
-                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.resume.cover_letters, function (letter) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
                   href: _ctx.route('edit.resume', letter.id)
                 }, {
                   "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -22516,23 +22587,122 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                 }, 1032
                 /* PROPS, DYNAMIC_SLOTS */
-                , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+                , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
                   href: _ctx.route('edit.resume', $props.resume.id)
                 }, {
                   "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                    return [_hoisted_23];
+                    return [_hoisted_24];
                   }),
                   _: 1
                   /* STABLE */
 
                 }, 8
                 /* PROPS */
-                , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(letter.updated_at), 1
+                , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(letter.updated_at), 1
                 /* TEXT */
                 )]);
               }), 256
               /* UNKEYED_FRAGMENT */
-              ))])])];
+              ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+                type: "button",
+                id: "coverLetterToggleBtn",
+                onClick: $options.toggleNewCoverLetterForm,
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+                  'opacity-25': $data.contactForm.processing
+                }),
+                disabled: $data.contactForm.processing
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [_hoisted_27];
+                }),
+                _: 1
+                /* STABLE */
+
+              }, 8
+              /* PROPS */
+              , ["onClick", "class", "disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+                onSubmit: _cache[10] || (_cache[10] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+                  return $options.createCoverLetter && $options.createCoverLetter.apply($options, arguments);
+                }, ["prevent"]))
+              }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Input, {
+                modelValue: $data.coverLetterForm.resumeid,
+                "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+                  return $data.coverLetterForm.resumeid = $event;
+                }),
+                id: "rid",
+                type: "hidden"
+              }, null, 8
+              /* PROPS */
+              , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Label, null, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [_hoisted_30];
+                }),
+                _: 1
+                /* STABLE */
+
+              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Input, {
+                modelValue: $data.coverLetterForm.title,
+                "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+                  return $data.coverLetterForm.title = $event;
+                }),
+                id: "clTitle",
+                type: "text",
+                "class": "mt-1 block w-full",
+                required: "",
+                autofocus: "",
+                autocomplete: "title"
+              }, null, 8
+              /* PROPS */
+              , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Label, null, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [_hoisted_32];
+                }),
+                _: 1
+                /* STABLE */
+
+              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+                rows: "10",
+                placeholder: "Type your cover letter here...",
+                "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+                  return $data.coverLetterForm.body = $event;
+                }),
+                id: "clBody",
+                "class": "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full mt-1 block"
+              }, null, 512
+              /* NEED_PATCH */
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.coverLetterForm.body]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Label, null, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Checkbox, {
+                    id: "coverDefault",
+                    modelValue: $data.coverLetterForm["default"],
+                    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+                      return $data.coverLetterForm["default"] = $event;
+                    }),
+                    checked: ""
+                  }, null, 8
+                  /* PROPS */
+                  , ["modelValue"]), _hoisted_34];
+                }),
+                _: 1
+                /* STABLE */
+
+              })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
+                "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+                  'opacity-25': $data.contactForm.processing
+                }),
+                disabled: $data.contactForm.processing
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [_hoisted_36];
+                }),
+                _: 1
+                /* STABLE */
+
+              }, 8
+              /* PROPS */
+              , ["class", "disabled"])])], 32
+              /* HYDRATE_EVENTS */
+              )])])];
             }),
             _: 1
             /* STABLE */

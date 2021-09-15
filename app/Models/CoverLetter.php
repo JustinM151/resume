@@ -10,6 +10,8 @@ class CoverLetter extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'body', 'default', 'resume_id'];
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::make($value)->format('m/d/Y g:iA');
