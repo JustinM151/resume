@@ -8,9 +8,12 @@
                     <!-- Dashboard Content -->
                     <div class="p-5">
                         <h1 class="text-5xl border-b-2 mb-4">Dashboard</h1>
-                        <div class="grid-cols-2 w-full">
+                        <div class="flex flex-row gap-4">
                             <div class="w-2/3">
                                 <ResumeList></ResumeList>
+                            </div>
+                            <div class="w-1/3">
+                                <WidgetBox title="Recent Visitors"></WidgetBox>
                             </div>
                         </div>
                     </div>
