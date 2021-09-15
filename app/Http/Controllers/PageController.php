@@ -25,6 +25,10 @@ class PageController extends Controller
         return Inertia::render('Resume')->with('resume',$resume);
     }
 
+    /**
+     * Render the admin dashboard
+     * @return \Inertia\Response
+     */
     public function dashboard() {
         $user = Auth::user();
         $resumes = Resume::with('education')

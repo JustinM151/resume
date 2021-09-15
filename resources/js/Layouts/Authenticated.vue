@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 bg-scroll bg-cover" style="background-image: url('images/forest-fog.jpg')">
+        <div class="min-h-screen bg-gray-100 bg-scroll bg-cover" style="background-image: url('/images/forest-fog.jpg')">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,7 +9,7 @@
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
                                 <Link :href="route('resume')">
-                                    JM
+                                    <span class="font-extrabold text-2xl inline-block transform rounded-xl -rotate-45 bg-gray-300 p-2">JM</span>
                                 </Link>
                             </div>
 
@@ -38,6 +38,9 @@
                                     </template>
 
                                     <template #content>
+                                        <BreezeDropdownLink v-if="user.is_admin" :href="route('dashboard')">
+                                            Dashboard
+                                        </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>
@@ -91,6 +94,8 @@
 
             <!-- Page Content -->
             <main>
+                <Notification id="errorAlertBox" type="error" v-if="hasErrors" :notifications="errors"></Notification>
+                <Notification id="notificationAlertBox" type="info" v-if="hasNotifications" :notifications="notifications"></Notification>
                 <slot />
             </main>
         </div>
@@ -103,22 +108,49 @@ import BreezeDropdown from '@/Components/Dropdown.vue'
 import BreezeDropdownLink from '@/Components/DropdownLink.vue'
 import BreezeNavLink from '@/Components/NavLink.vue'
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import Error from "@/Components/Error";
+import Notification from "@/Components/Notification";
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/inertia-vue3'
 import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
+    setup() {
+        const user = computed(() => usePage().props.value.auth.user)
+        const errors = computed(() => usePage().props.value.errors)
+        const notifications = computed(() => usePage().props.value.notifications)
+        return {user, errors, notifications}
+    },
     components: {
         BreezeApplicationLogo,
         BreezeDropdown,
         BreezeDropdownLink,
         BreezeNavLink,
         BreezeResponsiveNavLink,
+        Error,
+        Notification,
         Link,
     },
-
+    props: {
+    },
     data() {
         return {
             showingNavigationDropdown: false,
         }
     },
+    computed: {
+        hasErrors() {
+            if (this.errors !== undefined) {
+                return this.errors.length;
+            }
+            return false;
+        },
+        hasNotifications() {
+            if (this.notifications !== undefined) {
+                return this.notifications.length;
+            }
+            return false;
+        }
+    }
 }
 </script>
