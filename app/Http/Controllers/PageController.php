@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Resume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PageController extends Controller
 {
+    /**
+     * Render the active resume for logged-in users.
+     * @return \Inertia\Response
+     */
     public function resume() {
         $resume = Resume::with('education')
             ->with('experience')
@@ -18,5 +23,9 @@ class PageController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
         return Inertia::render('Resume')->with('resume',$resume);
+    }
+
+    public function dashboard() {
+        $user = Auth::user();
     }
 }

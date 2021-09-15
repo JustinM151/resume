@@ -29,4 +29,6 @@ Route::post('/access', [AuthenticatedSessionController::class, 'accessCode'])->n
 
 Route::get('/resume', [\App\Http\Controllers\PageController::class, 'resume'])->middleware(['auth', 'verified'])->name('resume');
 
+Route::get('/dashboard', [\App\Http\Controllers\PageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
 require __DIR__.'/auth.php';
