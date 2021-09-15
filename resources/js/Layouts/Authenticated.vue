@@ -94,6 +94,8 @@
 
             <!-- Page Content -->
             <main>
+                <Notification id="errorAlertBox" type="error" v-if="hasErrors" :notifications="errors"></Notification>
+                <Notification id="notificationAlertBox" type="info" v-if="hasNotifications" :notifications="notifications"></Notification>
                 <slot />
             </main>
         </div>
@@ -106,6 +108,8 @@ import BreezeDropdown from '@/Components/Dropdown.vue'
 import BreezeDropdownLink from '@/Components/DropdownLink.vue'
 import BreezeNavLink from '@/Components/NavLink.vue'
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import Error from "@/Components/Error";
+import Notification from "@/Components/Notification";
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import { Link } from '@inertiajs/inertia-vue3';
@@ -113,7 +117,9 @@ import { Link } from '@inertiajs/inertia-vue3';
 export default {
     setup() {
         const user = computed(() => usePage().props.value.auth.user)
-        return {user}
+        const errors = computed(() => usePage().props.value.errors)
+        const notifications = computed(() => usePage().props.value.notifications)
+        return {user, errors, notifications}
     },
     components: {
         BreezeApplicationLogo,
@@ -121,13 +127,30 @@ export default {
         BreezeDropdownLink,
         BreezeNavLink,
         BreezeResponsiveNavLink,
+        Error,
+        Notification,
         Link,
     },
-
+    props: {
+    },
     data() {
         return {
             showingNavigationDropdown: false,
         }
     },
+    computed: {
+        hasErrors() {
+            if (this.errors !== undefined) {
+                return this.errors.length;
+            }
+            return false;
+        },
+        hasNotifications() {
+            if (this.notifications !== undefined) {
+                return this.notifications.length;
+            }
+            return false;
+        }
+    }
 }
 </script>

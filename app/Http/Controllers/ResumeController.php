@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class ResumeController extends Controller
@@ -78,10 +79,15 @@ class ResumeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $resume = Resume::findOrFail($id);
-        $resume->fill($request->input());
-        $resume->save();
-        return Inertia::render('EditResume')->with('resume',$resume);
+        try {
+            $resume = Resume::findOrFail($id);
+            $resume->fill($request->input());
+            $resume->save();
+            return Inertia::render('EditResume')->with('resume',$resume)->with('notifications',['Successfully updated Resume']);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('errors', ['An unhandled exception occured while updating your resume.']);
+        }
     }
 
     /**

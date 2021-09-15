@@ -35,9 +35,7 @@
                             </form>
                         </widget-box>
 
-                        <widget-box title="Skills" class="mt-4">
-
-                        </widget-box>
+                        <widget-box title="Skills" class="mt-4"></widget-box>
                     </div>
 
                     <div class="w-3/4">
@@ -56,6 +54,26 @@
                         <widget-box title="Certificates &amp; Awards" class="mt-4">
 
                         </widget-box>
+
+                        <widget-box title="Cover Letter(s)" class="mt-4">
+                            <table class="table-auto w-full">
+                                <thead>
+                                <tr>
+                                    <th class="text-left font-extrabold bg-gray-300 p-2 w-2/3">Title</th>
+                                    <th class="text-left font-extrabold bg-gray-300 p-2">Action</th>
+                                    <th class="text-left font-extrabold bg-gray-300 p-2">Last Updated</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr v-for="letter in resume.cover_letters" class="odd:bg-gray-200">
+                                    <td class="p-2"><Link :href="route('edit.resume', letter.id)">{{letter.title}}</Link></td>
+                                    <td class="p-2"><Link :href="route('edit.resume', resume.id)">D</Link></td>
+                                    <td class="p-2">{{letter.updated_at}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </widget-box>
                     </div>
                 </div>
             </div>
@@ -71,6 +89,7 @@ import Dashboard from "@/Pages/Dashboard";
 import Label from "@/Components/Label";
 import Input from "@/Components/Input";
 import Button from "@/Components/Button";
+import {Link} from "@inertiajs/inertia-vue3";
 
 export default {
     name: "EditResume",
@@ -82,6 +101,7 @@ export default {
         WidgetBox,
         MainContentBox,
         BreezeAuthenticatedLayout,
+        Link,
     },
     props: {
         resume: Object,
