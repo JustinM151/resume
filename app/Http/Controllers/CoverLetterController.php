@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Resume;
+use App\Models\CoverLetter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
-class ResumeController extends Controller
+class CoverLetterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +41,10 @@ class ResumeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Resume  $resume
+     * @param  \App\Models\CoverLetter  $coverLetter
      * @return \Illuminate\Http\Response
      */
-    public function show(Resume $resume)
+    public function show(CoverLetter $coverLetter)
     {
         //
     }
@@ -54,43 +52,33 @@ class ResumeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Resume  $resume
-     * @return \Inertia\Response
+     * @param  \App\Models\CoverLetter  $coverLetter
+     * @return \Illuminate\Http\Response
      */
-    public function edit($resume)
+    public function edit(CoverLetter $coverLetter)
     {
-        $resume = Resume::with('education')
-            ->with('coverLetters')
-            ->with('experience')
-            ->with('projects')
-            ->with('skills')
-            ->with('awards')
-            ->findOrFail($resume);
-        return Inertia::render('EditResume')->with('resume',$resume);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Resume  $resume
-     * @return \Inertia\Response
+     * @param  \App\Models\CoverLetter  $coverLetter
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CoverLetter $coverLetter)
     {
-        $resume = Resume::findOrFail($id);
-        $resume->fill($request->input());
-        $resume->save();
-        return Inertia::render('EditResume')->with('resume',$resume);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Resume  $resume
+     * @param  \App\Models\CoverLetter  $coverLetter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resume $resume)
+    public function destroy(CoverLetter $coverLetter)
     {
         //
     }

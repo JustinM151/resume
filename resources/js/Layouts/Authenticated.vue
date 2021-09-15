@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 bg-scroll bg-cover" style="background-image: url('images/forest-fog.jpg')">
+        <div class="min-h-screen bg-gray-100 bg-scroll bg-cover" style="background-image: url('/images/forest-fog.jpg')">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,7 +9,7 @@
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
                                 <Link :href="route('resume')">
-                                    JM
+                                    <span class="font-extrabold text-2xl inline-block transform rounded-xl -rotate-45 bg-gray-300 p-2">JM</span>
                                 </Link>
                             </div>
 
