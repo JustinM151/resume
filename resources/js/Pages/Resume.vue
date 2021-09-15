@@ -38,7 +38,7 @@
                                         <p class="italic">{{education.degree}} - {{education.major}}</p>
                                     </div>
                                     <div class="flex-grow text-right">
-                                        <p>Graduated: {{dateStrToMonthYear(education.finish)}}</p>
+                                        <p>Graduated: {{education.finish}}</p>
                                         <p>GPA: {{education.gpa}}</p>
                                         <p>Distinctions: {{education.distinctions}}</p>
                                     </div>
@@ -63,7 +63,7 @@
                                         <p class="italic">{{job.title}}</p>
                                     </div>
                                     <div class="flex-grow text-right">
-                                        <p>{{dateStrToMonthYear(job.start)}} - {{dateStrToMonthYear(job.finish)}}</p>
+                                        <p>{{outputToFromDates(job.start,job.finish)}}</p>
                                     </div>
                                 </div>
                                 <div class="flex-row mt-3">
@@ -90,7 +90,7 @@
                                         <h3 class="text-2xl">{{project.name}}</h3>
                                     </div>
                                     <div class="flex-grow text-right">
-                                        <p><a :href="project.link">{{project.link}}</a></p>
+                                        <p><a class="text-blue-400 underline" :href="project.link">{{project.link}}</a></p>
                                     </div>
                                 </div>
                                 <div class="flex-row mt-3">
@@ -112,7 +112,7 @@
                                         <p class="italic">cert.from</p>
                                     </div>
                                     <div class="flex-grow text-right">
-                                        <p>{{dateStrToMonthYear(cert.award_date)}}</p>
+                                        <p>{{cert.award_date}}</p>
                                     </div>
                                 </div>
                                 <div class="flex-row mt-3">
@@ -146,11 +146,23 @@ export default {
 
     },
     methods: {
-        dateStrToMonthYear(dateStr) {
-            let dt = new Date(dateStr);
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            return months[dt.getMonth()+1]+" "+dt.getFullYear();
-        }
+        outputToFromDates(start, finish) {
+            console.log("Is this even called?");
+            console.log(finish);
+            if (start && finish) {
+                return start+" - "+finish;
+            }
+
+            if (!start && finish) {
+                return "Until "+finish;
+            }
+
+            if (start && !finish) {
+                return "Since "+start;
+            }
+
+            return "";
+        },
     }
 }
 </script>
