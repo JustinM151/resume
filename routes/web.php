@@ -27,6 +27,9 @@ Route::get('/', function () {
 
 Route::post('/access', [AuthenticatedSessionController::class, 'accessCode'])->name('access');
 
-Route::get('/resume', [\App\Http\Controllers\PageController::class, 'resume'])->middleware(['auth', 'verified'])->name('resume');
+Route::get('/resume', [\App\Http\Controllers\PageController::class, 'resume'])->middleware(['auth'])->name('resume');
+Route::get('/resume/{id}', [\App\Http\Controllers\ResumeController::class, 'edit'])->middleware(['auth', 'admin'])->name('edit.resume');
+
+Route::get('/dashboard', [\App\Http\Controllers\PageController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('dashboard');
 
 require __DIR__.'/auth.php';
