@@ -38,6 +38,9 @@
                                     </template>
 
                                     <template #content>
+                                        <BreezeDropdownLink v-if="user.is_admin" :href="route('dashboard')">
+                                            Dashboard
+                                        </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>
@@ -103,9 +106,15 @@ import BreezeDropdown from '@/Components/Dropdown.vue'
 import BreezeDropdownLink from '@/Components/DropdownLink.vue'
 import BreezeNavLink from '@/Components/NavLink.vue'
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/inertia-vue3'
 import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
+    setup() {
+        const user = computed(() => usePage().props.value.auth.user)
+        return {user}
+    },
     components: {
         BreezeApplicationLogo,
         BreezeDropdown,
