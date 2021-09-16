@@ -81,6 +81,27 @@
 
                     <hr>
 
+                    <ResumeSection section-header="Certificates &amp; Awards">
+                        <div v-for="cert in $page.props.resume.awards" class="w-full p-3 my-4 rounded border-2 border-gray-300">
+                            <div class="flex-col">
+                                <div class="flex">
+                                    <div class="flex-none">
+                                        <h3 class="text-2xl">{{cert.name}}</h3>
+                                        <p class="italic">{{cert.from}}</p>
+                                    </div>
+                                    <div class="flex-grow text-right">
+                                        <p>{{cert.award_date}}</p>
+                                    </div>
+                                </div>
+                                <div class="flex-row mt-3">
+                                    <div class="flex-grow" v-html="cert.description"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </ResumeSection>
+
+                    <hr>
+
                     <ResumeSection section-header="Projects">
                         <div v-for="project in $page.props.resume.projects" class="w-full p-3 my-4 rounded border-2 border-gray-300">
                             <div class="flex-col">
@@ -94,29 +115,6 @@
                                 </div>
                                 <div class="flex-row mt-3">
                                     <div class="flex-grow" v-html="project.description">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ResumeSection>
-
-                    <hr>
-
-                    <ResumeSection section-header="Certificates &amp; Awards">
-                        <div v-for="cert in $page.props.resume.awards" class="w-full p-3 my-4 rounded border-2 border-gray-300">
-                            <div class="flex-col">
-                                <div class="flex">
-                                    <div class="flex-none">
-                                        <h3 class="text-2xl">{{cert.name}}</h3>
-                                        <p class="italic">cert.from</p>
-                                    </div>
-                                    <div class="flex-grow text-right">
-                                        <p>{{cert.award_date}}</p>
-                                    </div>
-                                </div>
-                                <div class="flex-row mt-3">
-                                    <div class="flex-grow">
-                                        <p>cert.description</p>
                                     </div>
                                 </div>
                             </div>
