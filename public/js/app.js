@@ -21250,7 +21250,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "min-h-screen bg-gray-100 bg-scroll bg-cover",
+  "class": "min-h-screen bg-gray-100 bg-fixed bg-cover",
   style: {
     "background-image": "url('/images/forest-fog.jpg')"
   }
