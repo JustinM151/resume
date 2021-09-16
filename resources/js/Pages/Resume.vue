@@ -44,8 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-row">
-                                    <div class="flex-grow">
-                                        <p class="mt-3">{{education.description}}</p>
+                                    <div class="flex-grow" v-html="education.description">
                                     </div>
                                 </div>
                             </div>
